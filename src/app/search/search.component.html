@@ -1,0 +1,49 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Github user" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+
+</form>
+<button mat-raised-button color="warn" (click)="getDetails()">Find Me</button>
+<!-- <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{profile.name}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{profile.avatar_url}} alt="">
+        <mat-card-content>
+            <a href={{profile.html_url}} target="_blank">{{profile.login}}</a>
+        </mat-card-content>
+      </mat-card> -->
+<div *ngIf="isLoad; else displayBlock" class="d-flex justify-content-center">
+    <div class="spinner-grow text-primary" role="status" style="width: 6rem; height: 6rem; margin-top: 20px">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<ng-template #displayBlock>
+    <div *ngIf="hasUser && clicked; else noUserBlock" class="col-12" style="margin-top: 10px; padding: 0;">
+        <div class="card text-center" style="color: white;">
+            <div class="card-header" style="background-color: darkcyan">
+                <h3>{{user.name}}</h3>
+                <p>{{user.location}}</p>
+            </div>
+            <div class="card-body">
+                <img [src]="user.avatar_url">
+            </div>
+            <div class="card-footer" style="background-color:darkcyan">
+                <p>{{user.bio}}</p>
+                <a [href]="user.html_url" target="_blank"
+                    style="color: white; font-size: 20px; text-decoration: underline">
+                    {{user.name}}</a>
+            </div>
+        </div>
+    </div>
+    <ng-template #noUserBlock>
+        <div *ngIf="clicked && !hasUser" class="card text-center" style="background-color: darkcyan;
+                    color: white; margin-top: 20px;">
+            <div class="card-body">
+                <h4><i>Username doesn't exist!</i></h4>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>
