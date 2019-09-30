@@ -35,7 +35,7 @@ export class SearchComponent implements OnInit {
         closeButton: true
       });
     } else {
-      return this.httpClient.get(`https://api.github.com/users/${this.username}?access_token=b39870d5dd43d528238ecb71187dcc0371823b9c`)
+      return this.httpClient.get(`https://api.github.com/users/${this.username}`)
         .subscribe((res) => {
           this.user = res;
           this.clicked = true;
